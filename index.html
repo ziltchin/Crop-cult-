@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CROP CULT | Premium Basics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Inter:wght@200;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #ffffff; --text: #111111; --accent: #8c764d; --light: #f4f4f4; --meta: #888888; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); font-family: 'Inter', sans-serif; color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+        /* Navigation */
+        nav { padding: 40px; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; letter-spacing: 8px; text-transform: uppercase; text-decoration: none; color: var(--text); }
+        .status-dot { display: inline-block; width: 6px; height: 6px; background: #22c55e; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 10px #22c55e; }
+        .nav-right { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; display: flex; align-items: center; }
+
+        /* Stunning Hero Section */
+        .hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; border-bottom: 1px solid #f0f0f0; background: linear-gradient(to bottom, #fff, #fafafa); }
+        .hero span { font-size: 12px; letter-spacing: 6px; text-transform: uppercase; color: var(--meta); margin-bottom: 20px; display: block; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(50px, 10vw, 110px); font-weight: 300; line-height: 0.85; margin-bottom: 40px; letter-spacing: -2px; }
+        .hero h1 em { font-style: italic; color: var(--accent); }
+        .hero-footer { display: flex; justify-content: space-between; align-items: flex-end; }
+        .explore-link { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; color: var(--text); border-bottom: 1px solid var(--text); padding-bottom: 5px; }
+
+        /* Product Grid */
+        .container { padding: 100px 5%; }
+        .grid-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; }
+        .grid-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 60px 40px; }
+        .card { position: relative; text-decoration: none; color: inherit; }
+        .img-wrapper { aspect-ratio: 4/5; background: var(--light); margin-bottom: 25px; overflow: hidden; position: relative; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+        .card:hover .img-wrapper img { transform: scale(1.05); }
+        
+        .card-info { display: flex; justify-content: space-between; align-items: flex-start; }
+        .card-title { font-size: 15px; font-weight: 400; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+        .card-desc { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: var(--meta); }
+        .card-price { font-size: 15px; font-weight: 500; }
+
+        /* Call to Action */
+        .whatsapp-cta { position: fixed; bottom: 40px; right: 40px; background: var(--text); color: white; padding: 20px 35px; border-radius: 2px; text-decoration: none; font-size: 11px; letter-spacing: 3px; font-weight: 500; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.3s; text-transform: uppercase; }
+        .whatsapp-cta:hover { background: var(--accent); transform: translateY(-5px); }
+
+        @media (max-width: 768px) {
+            nav { padding: 25px; }
+            .hero { padding: 0 5%; height: 70vh; }
+            .hero h1 { font-size: 60px; }
+            .grid { grid-template-columns: 1fr 1fr; gap: 30px 15px; }
+            .container { padding: 60px 15px; }
+            .card-title { font-size: 12px; }
+            .card-price { font-size: 12px; }
+            .whatsapp-cta { bottom: 20px; right: 20px; left: 20px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="logo">CULT</a>
+    <div class="nav-right">
+        <span class="status-dot"></span> Available in Nairobi
+    </div>
+</nav>
+
+<section class="hero">
+    <span>Season 01 — Basics</span>
+    <h1>Essential<br><em>Simplicity</em></h1>
+    <div class="hero-footer">
+        <a href="#collection" class="explore-link">Explore Collection</a>
+    </div>
+</section>
+
+<div class="container" id="collection">
+    <div class="grid-header">
+        <h2>The Shop</h2>
+        <p style="font-size: 11px; color: var(--meta); letter-spacing: 1px;">02 PIECES AVAILABLE</p>
+    </div>
+    <div class="grid" id="productGrid">
+        </div>
+</div>
+
+<a href="https://wa.me/254791550252" class="whatsapp-cta">Secure Your Piece</a>
+
+<script>
+// Same Sheet Logic as before - it works perfectly!
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1-6-IAao1S3wi7xmiPlQOsHmz0ohMxfYHwf7sYGQ9cAQ/export?format=csv';
+
+async function loadProducts() {
+    try {
+        const response = await fetch(SHEET_URL);
+        const data = await response.text();
+        const rows = data.split('\n').slice(1); 
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = '';
+
+        rows.forEach(row => {
+            const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+            if (cols.length < 5) return;
+
+            const name = cols[1]?.replace(/"/g, '');    
+            const price = cols[3]?.replace(/"/g, '');   
+            const desc = cols[4]?.replace(/"/g, '') || 'Basics';
+            let img = cols[5]?.replace(/"/g, '').trim(); 
+
+            // Logic to handle Google Drive links from your sheet automatically
+            if (img.includes('drive.google.com')) {
+                const id = img.split('/d/')[1].split('/')[0];
+                img = `https://lh3.googleusercontent.com/d/${id}`;
+            }
+
+            grid.innerHTML += `
+                <a href="https://wa.me/254791550252" class="card">
+                    <div class="img-wrapper">
+                        <img src="${img}" alt="${name}" onerror="this.src='https://placehold.co/800x1000?text=CULT+BASICS'">
+                    </div>
+                    <div class="card-info">
+                        <div class="p-details">
+                            <h3 class="card-title">${name}</h3>
+                            <p class="card-desc">${desc}</p>
+                        </div>
+                        <div class="card-price">KSh ${price}</div>
+                    </div>
+                </a>
+            `;
+        });
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+loadProducts();
+</script>
+
+</body>
+</html>
