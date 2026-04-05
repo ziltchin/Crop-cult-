@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<title>Crop Cult | Karen, Nairobi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #FAF7F2;
+  --sand: #E8E0D4;
+  --dark: #1A1714;
+  --charcoal: #2D2A27;
+  --muted: #8A8178;
+  --accent: #C9A96E;
+  --accent-light: #E8D5B0;
+  --accent-dark: #9A7A4A;
+  --white: #FFFFFF;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--cream); font-family: 'Jost', sans-serif; color: var(--dark); overflow-x: hidden; }
+
+/* NAVIGATION */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 32px;
+  background: rgba(250,247,242,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--sand); transition: all 0.3s;
+}
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--dark); text-decoration: none; }
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--dark); }
+.nav-cta { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; background: var(--dark); color: var(--cream); padding: 10px 24px; border-radius: 2px; text-decoration: none; transition: all 0.2s; }
+.nav-cta:hover { background: var(--accent); }
+
+/* HERO SECTION */
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 32px 80px; position: relative; overflow: hidden; background: var(--dark); }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 30% 50%, #C9A96E18 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 70% 30%, #C9A96E10 0%, transparent 60%); }
+.hero-eyebrow { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s 0.2s ease both; }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(56px, 12vw, 120px); font-weight: 300; line-height: 0.95; color: var(--cream); letter-spacing: -2px; margin-bottom: 8px; opacity: 0; animation: fadeUp 0.8s 0.4s ease both; }
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero-sub { font-size: 13px; letter-spacing: 2px; color: var(--muted); margin-top: 24px; opacity: 0; animation: fadeUp 0.8s 0.6s ease both; }
+.hero-btns { display: flex; gap: 16px; margin-top: 48px; opacity: 0; animation: fadeUp 0.8s 0.8s ease both; flex-wrap: wrap; justify-content: center; }
+.btn-primary { background: var(--accent); color: var(--dark); padding: 16px 40px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.3s; font-family: 'Jost', sans-serif; border: none; cursor: pointer; }
+.btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); }
+.btn-outline { border: 1px solid #ffffff40; color: var(--cream); padding: 16px 40px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.3s; font-family: 'Jost', sans-serif; cursor: pointer; background: transparent; }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+/* PRODUCT GRID */
+.collection-section { background: var(--dark); padding: 100px 32px; }
+.collection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1100px; margin: 0 auto; }
+.product-card { background: var(--charcoal); border-radius: 4px; overflow: hidden; cursor: pointer; transition: transform 0.3s; position: relative; }
+.product-card:hover { transform: translateY(-4px); }
+.product-info { padding: 16px 20px 20px; }
+.product-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--cream); }
+.product-price { font-size: 14px; color: var(--accent); margin-top: 8px; }
+
+/* MODAL & FORMS */
+.form-submit { width: 100%; background: var(--dark); color: var(--cream); border: none; padding: 18px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-family: 'Jost', sans-serif; cursor: pointer; border-radius: 2px; transition: all 0.3s; }
+.form-submit:hover { background: var(--accent); color: var(--dark); }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .collection-grid { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Crop <span>Cult</span></a>
+  <ul class="nav-links">
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#order">Order</a></li>
+    <li><a href="#location">Find Us</a></li>
+  </ul>
+  <a href="#order" class="nav-cta">Shop Now</a>
+</nav>
+
+<section class="hero">
+  <p class="hero-eyebrow">Karen, Nairobi · Est. 2024</p>
+  <h1>Wear the<br><em>Cult.</em></h1>
+  <p class="hero-sub">Curated fashion for the bold & the beautiful</p>
+  <div class="hero-btns">
+    <a href="#collection" class="btn-primary">Explore Collection</a>
+    <a href="#order" class="btn-outline">Place an Order</a>
+  </div>
+</section>
+
+<section class="collection-section" id="collection">
+  <div class="collection-grid" id="collectionGrid">
+    </div>
+</section>
+
+<section class="order-section" id="order" style="padding: 100px 32px; background: var(--cream);">
+  <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+    <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 48px; margin-bottom: 20px;">Place your <em>order</em></h2>
+    <p style="margin-bottom: 40px; color: var(--muted);">We'll reach out on WhatsApp to confirm availability and delivery.</p>
+    
+    <form id="orderForm" onsubmit="submitOrder(event)">
+      <input type="text" placeholder="Your Name" required style="width:100%; padding:15px; margin-bottom:15px; border:1px solid var(--sand);">
+      <input type="tel" placeholder="Phone Number" required style="width:100%; padding:15px; margin-bottom:15px; border:1px solid var(--sand);">
+      <textarea placeholder="Which items are you interested in?" style="width:100%; padding:15px; margin-bottom:15px; border:1px solid var(--sand); height:100px;"></textarea>
+      <button type="submit" class="form-submit">Send Order Request</button>
+    </form>
+    <div id="successMsg" style="display:none; padding:40px; background:white; border:1px solid var(--accent);">
+      <h3>Message Sent!</h3>
+      <p>We will contact you at <strong>0791 550 252</strong> shortly.</p>
+    </div>
+  </div>
+</section>
+
+<footer style="background: var(--dark); color: var(--muted); padding: 60px 32px; text-align: center;">
+  <div class="footer-logo" style="color:white; font-size:24px; margin-bottom:20px;">CROP <span>CULT</span></div>
+  <p>Karen End, Nairobi</p>
+  <p style="margin: 10px 0;"><a href="tel:0791550252" style="color:var(--accent); text-decoration:none;">0791 550 252</a></p>
+  <p>© 2025 Crop Cult. All rights reserved.</p>
+</footer>
+
+<script>
+// UPDATED GOOGLE SHEET CSV LINK
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1-6-IAao1S3wi7xmiPlQOsHmz0ohMxfYHwf7sYGQ9cAQ/export?format=csv';
+
+async function loadProducts() {
+  try {
+    const res = await fetch(SHEET_URL);
+    const text = await res.text();
+    const rows = text.split('\n').slice(1); // Skip header row
+    
+    const grid = document.getElementById('collectionGrid');
+    grid.innerHTML = rows.map(row => {
+      const columns = row.split(',');
+      if(columns.length < 2) return ''; 
+      
+      return `
+        <div class="product-card">
+          <div style="aspect-ratio:3/4; background:#252220; display:flex; align-items:center; justify-content:center; color:#444;">
+             [ Image ]
+          </div>
+          <div class="product-info">
+            <div class="product-name">${columns[0]}</div>
+            <div class="product-price">KSh ${columns[2] || 'TBD'}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  } catch (e) {
+    console.error("Error loading products:", e);
+  }
+}
+
+function submitOrder(e) {
+  e.preventDefault();
+  document.getElementById('orderForm').style.display = 'none';
+  document.getElementById('successMsg').style.display = 'block';
+}
+
+loadProducts();
+</script>
+
+</body>
+</html>
